@@ -45,12 +45,16 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Имя</th>
+                <th scope="col">Описание</th>
+                <th scope="col">Дата создания</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="candidate: ${candidates}">
                 <td th:text="${candidate.getId()}"></td>
                 <td th:text="${candidate.getName()}"></td>
+                <td th:text="${candidate.getDesc()}"></td>
+                <td th:text="${candidate.getCreated()}"></td>
             </tr>
             </tbody>
         </table>
