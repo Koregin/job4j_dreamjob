@@ -33,9 +33,18 @@ public class PostStore {
         return posts.values();
     }
 
-    public Post add(Post post) {
+    public Post create(Post post) {
         post.setId(counter.incrementAndGet());
         post.setCreated(LocalDate.now());
         return posts.put(post.getId(), post);
+    }
+
+    public Post update(Post post) {
+        post.setCreated(LocalDate.now());
+        return posts.put(post.getId(), post);
+    }
+
+    public Post findById(int id) {
+        return posts.get(id);
     }
 }
