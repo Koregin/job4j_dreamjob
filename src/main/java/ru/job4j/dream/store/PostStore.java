@@ -2,6 +2,7 @@ package ru.job4j.dream.store;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 
 import java.time.LocalDate;
@@ -25,6 +26,9 @@ public class PostStore {
                 "Job for middle", LocalDate.of(2022, 4, 12)));
         posts.put(3, new Post(counter.incrementAndGet(), "Senior Java Job",
                 "Job for senior", LocalDate.of(2022, 4, 12)));
+        posts.forEach(
+                (id, post) -> post.setCity(new City(1, null))
+        );
     }
 
     public Collection<Post> findAll() {
