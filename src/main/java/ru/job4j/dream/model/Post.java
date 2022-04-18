@@ -8,6 +8,7 @@ public class Post {
     private String name;
     private String description;
     public LocalDate created;
+    private boolean visible;
 
     public Post() {
     }
@@ -54,6 +55,14 @@ public class Post {
 
     public void setCreated(LocalDate created) {
         this.created = created;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     @Override
