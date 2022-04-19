@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.service.CityService;
 import ru.job4j.dream.service.PostService;
@@ -45,8 +44,7 @@ public class PostController {
     @GetMapping("/formUpdatePost/{postId}")
     public String formUpdatePost(Model model, @PathVariable("postId") int id) {
         Post post = postService.findById(id);
-        City city = cityService.findById(post.getCity().getId());
-        post.getCity().setName(city.getName());
+        post.setCity(cityService.findById(post.getCity().getId()));
         model.addAttribute("cities", cityService.getAllCities());
         model.addAttribute("post", post);
         return "updatePost";
