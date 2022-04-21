@@ -15,6 +15,13 @@ CREATE TABLE if not exists candidate (
    photo bytea
 );
 
+CREATE TABLE if not exists users (
+  id SERIAL PRIMARY KEY,
+  name varchar,
+  email TEXT,
+  password TEXT
+);
+
 INSERT INTO post (name, description, created, visible, city_id)
         VALUES ('Junior Java Job', 'Job for junior', '2022-04-12', false, 1);
 INSERT INTO post (name, description, created, visible, city_id)
