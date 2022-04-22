@@ -7,6 +7,7 @@ import ru.job4j.dream.model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Optional;
 
 @Repository
 public class UserDBStore {
@@ -17,7 +18,7 @@ public class UserDBStore {
         this.pool = pool;
     }
 
-    public User create(User user) {
+    public Optional<User> create(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("INSERT INTO users(name, email, password) VALUES (?, ?, ?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
@@ -32,8 +33,8 @@ public class UserDBStore {
                 }
             }
         } catch (Exception e) {
-            return null;
+            return Optional.empty();
         }
-        return user;
+        return Optional.of(user);
     }
 }

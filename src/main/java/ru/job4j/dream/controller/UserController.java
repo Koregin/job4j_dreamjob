@@ -1,6 +1,7 @@
 package ru.job4j.dream.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +26,8 @@ public class UserController {
     }
 
     @GetMapping("/fail")
-    public String fail() {
+    public String fail(Model model) {
+        model.addAttribute("message", "Пользователь с такой почтой уже существует");
         return "fail";
     }
 
@@ -35,10 +37,9 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String registration(RedirectAttributes redirectAttrs, @ModelAttribute User user) {
-        Optional<User> regUser = Optional.ofNullable(userService.add(user));
+    public String registration(@ModelAttribute User user) {
+        Optional<User> regUser = userService.add(user);
         if (regUser.isEmpty()) {
-            redirectAttrs.addAttribute("message", "Пользователь с такой почтой уже существует");
             return "redirect:/fail";
         }
         return "redirect:/success";
